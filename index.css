@@ -1,0 +1,67 @@
+/* .header {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    background-color: rgb(225, 193, 248);
+}
+
+.logo {
+    height: 60px;
+    width: 100px;
+    border-radius: 25px;
+}
+
+.nav-items>ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+.nav-items>ul>li {
+    padding: 10px;
+}
+
+.card {
+    height: 420px;
+    width: 300px;
+    background-color: rgb(117, 174, 253);
+    padding: 10px;
+    margin: 27px;
+    border: 1px solid black;
+    border-radius: 35px;
+}
+
+.card>img {
+    width: 100%;
+}
+
+.restraunt-cards {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(225, 193, 248);
+}
+
+.restaurant-shimmer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer {
+    background-color: rgb(225, 193, 248)
+}
+
+.menu {
+    display: flex;
+}
+
+.shimmer-card {
+    height: 320px;
+    width: 300px;
+    background-color: lightgray;
+    padding: 10px;
+    margin: 27px;
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
