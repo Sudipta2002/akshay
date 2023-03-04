@@ -1,5 +1,6 @@
-import React from 'react'
+import React ,{ useContext }from 'react'
 import {Link} from "react-router-dom"
+import UserContext from '../utils/UserContext';
 const Title = () => {
     return (
       <Link to="/">
@@ -8,6 +9,7 @@ const Title = () => {
     ); 
   };
    const  Header = () => {
+    const {user} =  useContext(UserContext);
     return (
       <div className="flex justify-between bg-pink-200 shadow-lg">
         <Title />
@@ -31,6 +33,10 @@ const Title = () => {
                 </li>
           </ul>
         </div> 
+        <h1 className='p-10 font-serif text-red-700'>
+          {user.name}
+          </h1>
+          
       </div>
     );
   };

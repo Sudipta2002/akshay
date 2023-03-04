@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useContext } from "react";
 import RestrauntCard from "./RestrauntCard";
 import restaurentList from "../../data";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext"
 function filter(searchData,restaurants){
     const filterData = restaurants.filter((res)=>res.data.name.toLowerCase().includes(searchData.toLowerCase()));
     console.log(filterData);
@@ -15,6 +16,7 @@ const Body = () => {
     const [search, setSearch] = useState("");
     const [restaurants, setRestaurants] = useState([]);
     const [allRestaurants,setAllRestaurants]=useState([]);
+    const {user,setUser}= useContext(UserContext);
     useEffect(() => {
       getRestaurants();
     }, [])
@@ -28,7 +30,10 @@ const Body = () => {
       } catch (error) {
         console.log(error);
       }
-    }  
+    }   
+    const handleChange=(e)=>{
+        setUser({name:e.target.value,email:"sudipta@gmail.com"})
+    }
     // if my restaurant is empty show shimmer UI
      if(!allRestaurants) return null;// early return
     
@@ -43,6 +48,7 @@ const Body = () => {
             const data= filter(search,allRestaurants);
             setRestaurants(data);
           }}> Search</button>
+          <input value={user.name} onChange={handleChange}></input>
         </div>
       </div>
       <div className="flex flex-wrap"> 
