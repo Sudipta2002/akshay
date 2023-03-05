@@ -4,16 +4,32 @@ import restaurentList from "../../data";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext"
+import Delivery from "./Delivery";
+import DiningOut from "./DiningOut";
+import NightLife from "./NightLife";
+import TabOption from "./TabOption";
 function filter(searchData,restaurants){
     const filterData = restaurants.filter((res)=>res.data.name.toLowerCase().includes(searchData.toLowerCase()));
     console.log(filterData);
     return filterData;
 }
-
+const getCorrectScreen = (tab) => {
+  switch (tab) {
+    case "Delivery":
+      return <Delivery />;
+    case "Dining Out":
+      return <DiningOut />;
+    case "Night Life":
+      return <NightLife />;
+    default:
+      return <Delivery />;
+  }
+};
 
 //https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING
 const Body = () => { 
     const [search, setSearch] = useState("");
+    const [activeTab, setActiveTab] = useState("Delivery");
     const [restaurants, setRestaurants] = useState([]);
     const [allRestaurants,setAllRestaurants]=useState([]);
     const {user,setUser}= useContext(UserContext);
@@ -41,6 +57,7 @@ const Body = () => {
     <>
       <div className="search-container p-5 bg-pink-50 my-5 shadow-md ">
         <div className="search">
+          <TabOption activeTab={activeTab} setActiveTab={setActiveTab} />
           <input className="rounded-lg shadow-2xl shadow-red-300 focus:bg-green-100 p-2 m-2" type="text" placeholder="Search"  value={search} onChange={(e)=>{
                 setSearch(e.target.value);
           }}/>
@@ -48,9 +65,11 @@ const Body = () => {
             const data= filter(search,allRestaurants);
             setRestaurants(data);
           }}> Search</button>
-          <input value={user.name} onChange={handleChange}></input>
+          {/* <input value={user.name} onChange={handleChange}></input> */}
+            
         </div>
       </div>
+            {getCorrectScreen(activeTab)}
       <div className="flex flex-wrap"> 
         {restaurants?.length==0?(<h1>No Restaurant to filter</h1>):( 
           restaurants.map((restraunt) => {
